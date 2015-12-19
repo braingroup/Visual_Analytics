@@ -1,9 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "glwidget.h"
 #include <QMessageBox>
 #include <QDebug>
-
+#include "graphfabric.h"
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -13,10 +12,22 @@ MainWindow::MainWindow(QWidget *parent) :
     Scroll_Widget = new QWidget(this);
     Scroll_Layout = new QVBoxLayout(this);
     Scroll_Widget->setLayout(Scroll_Layout);
-    ui->scrollArea->setWidget(Scroll_Widget);  
+    ui->scrollArea->setWidget(Scroll_Widget);
+    //
+    Fabric = new GraphFabric();
     //связи
     QObject::connect(ui->connection_button, SIGNAL(clicked()), this, SLOT(connect_to_db()));
     QObject::connect(ui->draw_graph_button, SIGNAL(clicked()), this, SLOT(draw_graph()));
+}
+
+void MainWindow::resizeEvent(QResizeEvent *event)
+{
+    //перересовка графика в соответствии с окном
+    for (int i = 0; i < box_with_graph.size(); i++){
+        box_with_graph[i].graphic->setFixedSize(Scroll_Widget->width() - 40, 400);
+        Fabric->BuildGraph(GraphType::CIRCLE, box_with_graph[i].graphic);
+        box_with_graph[i].layout->addWidget(box_with_graph[i].graphic);
+    }
 
 }
 
@@ -25,6 +36,7 @@ MainWindow::~MainWindow()
     //навсякий случай
     success_connections.clear();
     box_with_graph.clear();
+    delete Fabric;
     delete ui;
 }
 
@@ -104,35 +116,42 @@ void MainWindow::draw_graph(){
 
     //создание обекта графика
     type_graph new_graphic;
+
     new_graphic.layout = new QVBoxLayout(this);
     new_graphic.hlayout = new QHBoxLayout(this);
     new_graphic.close = new QPushButton("Закрыть график", this);
-    new_graphic.graphic = new GLWidget(this);
-    new_graphic.graphic->setFixedHeight(400);
+    new_graphic.graphic = new QWidget(this);
+    //new_graphic.graphic->setFixedHeight(400);
 
     new_graphic.hlayout->addStretch(1);
     new_graphic.hlayout->addWidget(new_graphic.close);
 
     new_graphic.layout->addLayout(new_graphic.hlayout);
-    new_graphic.layout->addWidget(new_graphic.graphic);
+
 
     //push в вектор графиков
-    box_with_graph.push_back(new_graphic);
 
-    //налаживаем связь сигнал - слот
-    QObject::connect(box_with_graph.last().close, SIGNAL(clicked()), this, SLOT(delete_graph()));
+
+
 
     /*
      *
      *
      *
     */
+    new_graphic.graphic->setFixedSize(Scroll_Widget->width() - 40, 400);
+    Fabric->BuildGraph(GraphType::CIRCLE, new_graphic.graphic);
+    new_graphic.layout->addWidget(new_graphic.graphic);
+
     QMessageBox::information(this, "data in mainwindow", "data for draw graph: \n" + graph_options->getdata() );
     /*
      * ПЕРЕДАЧА НА ОТРИСОВКУ
      *
      *
     */
+    box_with_graph.push_back(new_graphic);
+    //налаживаем связь сигнал - слот
+    QObject::connect(box_with_graph.last().close, SIGNAL(clicked()), this, SLOT(delete_graph()));
     Scroll_Layout->addLayout(box_with_graph.last().layout);
 }
 
@@ -156,5 +175,16 @@ void MainWindow::draw_graph(){
             return;
           }
       }
+ }
+
+ MainWindow* MainWindow::instance = 0;
+
+ MainWindow* MainWindow::getWindow()
+ {
+     if (!instance)
+     {
+         instance = new MainWindow();
+     }
+     return instance;
  }
 

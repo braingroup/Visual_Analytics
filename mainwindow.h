@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include <QVBoxLayout>
 #include "options_for_graphs.h"
-#include "glwidget.h"
+#include "graphfabric.h"
 
 namespace Ui {
 class MainWindow;
@@ -20,7 +20,7 @@ struct type_connect {
 
 struct type_graph{
     QPushButton *close; //кнопка "Закрыть график"
-    GLWidget *graphic; //класс графика
+    QWidget *graphic; //класс графика
     QVBoxLayout *layout;
     QHBoxLayout *hlayout;
 };
@@ -30,10 +30,20 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+    GraphFabric* Fabric;
+    static MainWindow* getWindow();
+    static void clearInstance()
+    {
+        if (MainWindow::instance != NULL)
+        {
+            delete MainWindow::instance;
+        }
+    }
 
 private:
+    explicit MainWindow(QWidget *parent = 0);
+    static MainWindow* instance;
     Ui::MainWindow *ui;
     QWidget *Scroll_Widget;
     QVBoxLayout *Scroll_Layout;
@@ -41,11 +51,13 @@ private:
     QVector <type_connect> success_connections;
     QVector <type_graph> box_with_graph;
     options_for_graphs *graph_options;
-
+protected:
+    virtual void resizeEvent(QResizeEvent *event);
 public slots:
     void connect_to_db();
     void draw_graph();
     void delete_graph();
+
 };
 
 

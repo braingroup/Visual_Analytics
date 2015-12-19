@@ -4,22 +4,38 @@
 #
 #-------------------------------------------------
 
-QT       += core gui opengl
+QT       += core gui
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 
 TARGET = VA
 TEMPLATE = app
 
+QMAKE_CXXFLAGS += -std=c++11
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    glwidget.cpp \
-    options_for_graphs.cpp
+        options_for_graphs.cpp \
+        circlegraph.cpp \
+        graph.cpp \
+        columngraph.cpp \
+        functiongraph.cpp \
+        drawableobject.cpp \
+        graphfabric.cpp \
+        graphtype.cpp \
+        qcustomplot.cpp
 
 HEADERS  += mainwindow.h \
-    glwidget.h \
-    options_for_graphs.h
+    options_for_graphs.h \
+    circlegraph.h \
+    graph.h \
+    columngraph.h \
+    functiongraph.h \
+    drawableobject.h \
+    graphfabric.h \
+    graphtype.h \
+    graphfabric.h \
+    qcustomplot.h
 
 FORMS    += mainwindow.ui \
     options_for_graphs.ui
