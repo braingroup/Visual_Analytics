@@ -1,8 +1,8 @@
 #ifndef GRAPH_H
 #define GRAPH_H
 
-#include "drawablearea.h"
 #include "drawableobject.h"
+#include "qcustomplot.h"
 
 
 
@@ -11,10 +11,10 @@ class Graph
 public:
     Graph();
     virtual ~Graph();
-    virtual void Draw() = 0;
+    virtual void Draw(QWidget * _DrawableArea, DrawableObject * _DrawableObject) = 0;
 protected:
-    DrawableArea _DrawableArea;
-    DrawableObject _DrawableObject;
+    QWidget * _DrawableArea;
+    DrawableObject* _DrawableObject;
 };
 
 #endif // GRAPH_H

@@ -8,7 +8,9 @@ class CircleGraph : public Graph
 {
 public:
     CircleGraph();
-    void Draw();
+    CircleGraph(QWidget* _Area);
+    ~CircleGraph();
+    void Draw(QWidget* _Area, DrawableObject * _DrawableObject);
 };
 
 #endif // CIRCLEGRAPH_H

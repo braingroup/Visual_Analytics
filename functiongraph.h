@@ -8,7 +8,9 @@ class FunctionGraph : public Graph
 {
 public:
     FunctionGraph();
-    void Draw();
+    FunctionGraph(QWidget* _Area);
+    ~FunctionGraph();
+    void Draw(QWidget * _Area, DrawableObject * _DrawableObject);
 };
 
 #endif // FUNCTIONGRAPH_H

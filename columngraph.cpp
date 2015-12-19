@@ -2,10 +2,20 @@
 
 ColumnGraph::ColumnGraph()
 {
-    Draw();
+
 }
 
-void ColumnGraph::Draw()
+ColumnGraph::ColumnGraph(QWidget* _Area)
+{
+    Draw(_Area, nullptr);
+}
+
+ColumnGraph::~ColumnGraph()
+{
+
+}
+
+void ColumnGraph::Draw(QWidget* _Area, DrawableObject * _DrawableObject)
 {
 
 }

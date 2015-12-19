@@ -12,7 +12,7 @@ public:
     GraphFabric();
     virtual ~GraphFabric();
 
-    static Graph* BuildGraph(GraphType graphType);
+    static Graph* BuildGraph(GraphType graphType, QWidget* _Area);
 };
 
 #endif // GRAPHFABRIC_H

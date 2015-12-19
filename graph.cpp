@@ -1,9 +1,9 @@
 #include "graph.h"
 #include "qcustomplot.h"
 
-Graph::Graph() : _DrawableArea() , _DrawableObject()
+Graph::Graph()
 {
-
+    _DrawableObject = nullptr;
 }
 
 Graph::~Graph()
@@ -11,7 +11,7 @@ Graph::~Graph()
 
 }
 
-void Graph::Draw()
+void Graph::Draw(QWidget* _DrawableArea, DrawableObject * _DrawableObject)
 {
 
 }

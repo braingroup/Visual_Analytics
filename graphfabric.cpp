@@ -10,18 +10,18 @@ GraphFabric::~GraphFabric()
 
 }
 
-Graph* GraphFabric::BuildGraph(GraphType graphType)
+Graph* GraphFabric::BuildGraph(GraphType graphType, QWidget* _Area)
 {
     switch(graphType)
     {
     case GraphType::CIRCLE:
-        return new CircleGraph();
+        return new CircleGraph(_Area);
         break;
     case GraphType::COLUMN:
-        return new ColumnGraph();
+        return new ColumnGraph(_Area);
         break;
     case GraphType::FUNCTION:
-        return new FunctionGraph();
+        return new FunctionGraph(_Area);
         break;
     default:
         return nullptr;

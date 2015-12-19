@@ -20,7 +20,6 @@ SOURCES += main.cpp\
         circlegraph.cpp \
         graph.cpp \
         columngraph.cpp \
-        drawablearea.cpp \
         functiongraph.cpp \
         drawableobject.cpp \
         graphfabric.cpp \
@@ -31,7 +30,6 @@ HEADERS  += mainwindow.h \
     circlegraph.h \
     graph.h \
     columngraph.h \
-    drawablearea.h \
     functiongraph.h \
     drawableobject.h \
     graphfabric.h \

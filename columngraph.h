@@ -8,7 +8,9 @@ class ColumnGraph : public Graph
 {
 public:
     ColumnGraph();
-    void Draw();
+    ColumnGraph(QWidget* _Area);
+    ~ColumnGraph();
+    void Draw(QWidget* _Area, DrawableObject * _DrawableObject);
 };
 
 #endif // COLUMNGRAPH_H

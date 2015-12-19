@@ -50,7 +50,6 @@ SOURCES       = main.cpp \
 		circlegraph.cpp \
 		graph.cpp \
 		columngraph.cpp \
-		drawablearea.cpp \
 		functiongraph.cpp \
 		drawableobject.cpp \
 		graphfabric.cpp \
@@ -62,7 +61,6 @@ OBJECTS       = main.o \
 		circlegraph.o \
 		graph.o \
 		columngraph.o \
-		drawablearea.o \
 		functiongraph.o \
 		drawableobject.o \
 		graphfabric.o \
@@ -287,7 +285,7 @@ qmake_all: FORCE
 
 dist: 
 	@test -d .tmp/cpp_project_11.0.0 || mkdir -p .tmp/cpp_project_11.0.0
-	$(COPY_FILE) --parents $(SOURCES) $(DIST) .tmp/cpp_project_11.0.0/ && $(COPY_FILE) --parents mainwindow.h circlegraph.h graph.h columngraph.h drawablearea.h functiongraph.h drawableobject.h graphfabric.h graphtype.h graphfabric.h qcustomplot.h .tmp/cpp_project_11.0.0/ && $(COPY_FILE) --parents main.cpp mainwindow.cpp circlegraph.cpp graph.cpp columngraph.cpp drawablearea.cpp functiongraph.cpp drawableobject.cpp graphfabric.cpp graphtype.cpp qcustomplot.cpp .tmp/cpp_project_11.0.0/ && $(COPY_FILE) --parents mainwindow.ui .tmp/cpp_project_11.0.0/ && (cd `dirname .tmp/cpp_project_11.0.0` && $(TAR) cpp_project_11.0.0.tar cpp_project_11.0.0 && $(COMPRESS) cpp_project_11.0.0.tar) && $(MOVE) `dirname .tmp/cpp_project_11.0.0`/cpp_project_11.0.0.tar.gz . && $(DEL_FILE) -r .tmp/cpp_project_11.0.0
+        $(COPY_FILE) --parents $(SOURCES) $(DIST) .tmp/cpp_project_11.0.0/ && $(COPY_FILE) --parents mainwindow.h circlegraph.h graph.h columngraph.h functiongraph.h drawableobject.h graphfabric.h graphtype.h graphfabric.h qcustomplot.h .tmp/cpp_project_11.0.0/ && $(COPY_FILE) --parents main.cpp mainwindow.cpp circlegraph.cpp graph.cpp columngraph.cpp functiongraph.cpp drawableobject.cpp graphfabric.cpp graphtype.cpp qcustomplot.cpp .tmp/cpp_project_11.0.0/ && $(COPY_FILE) --parents mainwindow.ui .tmp/cpp_project_11.0.0/ && (cd `dirname .tmp/cpp_project_11.0.0` && $(TAR) cpp_project_11.0.0.tar cpp_project_11.0.0 && $(COMPRESS) cpp_project_11.0.0.tar) && $(MOVE) `dirname .tmp/cpp_project_11.0.0`/cpp_project_11.0.0.tar.gz . && $(DEL_FILE) -r .tmp/cpp_project_11.0.0
 
 
 clean:compiler_clean 
@@ -1621,27 +1619,21 @@ mainwindow.o: mainwindow.cpp mainwindow.h \
 
 circlegraph.o: circlegraph.cpp circlegraph.h \
 		graph.h \
-		drawablearea.h \
 		drawableobject.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o circlegraph.o circlegraph.cpp
 
 graph.o: graph.cpp graph.h \
-		drawablearea.h \
 		drawableobject.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o graph.o graph.cpp
 
 columngraph.o: columngraph.cpp columngraph.h \
 		graph.h \
-		drawablearea.h \
 		drawableobject.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o columngraph.o columngraph.cpp
 
-drawablearea.o: drawablearea.cpp drawablearea.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o drawablearea.o drawablearea.cpp
 
 functiongraph.o: functiongraph.cpp functiongraph.h \
 		graph.h \
-		drawablearea.h \
 		drawableobject.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o functiongraph.o functiongraph.cpp
 
@@ -1651,7 +1643,6 @@ drawableobject.o: drawableobject.cpp drawableobject.h
 graphfabric.o: graphfabric.cpp graphfabric.h \
 		functiongraph.h \
 		graph.h \
-		drawablearea.h \
 		drawableobject.h \
 		circlegraph.h \
 		columngraph.h \
